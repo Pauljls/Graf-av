@@ -271,6 +271,75 @@ void MProyIso(){
     matrixPreMultiply(m,matrizTransformacion);
 }
 
+//18.PROYECCION OBLICUA SUPERIOR
+
+void ProyOblS(float a, float b){
+    Matrix4x4 m;
+    matrixSetIdentity(m);
+    a = a * 0.0174533;
+    b = b * 0.0174533;
+    m[0][2]=cos(b)*tan(a);
+    m[1][2]=sin(b)*tan(a);
+    m[2][2]=0;
+
+    matrixPreMultiply(m,matrizTransformacion);
+}
+//19.PROYECCION OBLICUA LATEREAL
+
+
+void ProyOblL(float a, float b){
+    a = a * 0.0174533;
+    b = b * 0.0174533;
+    Matrix4x4 m;
+    matrixSetIdentity(m);
+    m[1][1]=0;
+    m[0][2]=cos(b)*tan(a);
+    m[2][2]=sin(b)*tan(a);
+    matrixPreMultiply(m,matrizTransformacion);
+}
+
+
+//20.PROYECCION OBLICUA FRONTAL
+
+void ProyOblF(float a, float b){
+    a = a * 0.0174533;
+    b = b * 0.0174533;
+    Matrix4x4 m;
+    matrixSetIdentity(m);
+    m[0][0]=0;
+    m[1][2]=cos(b)*tan(a);
+    m[2][2]=sin(b)*tan(a);
+    matrixPreMultiply(m,matrizTransformacion);
+}
+
+//21.PROYECCION OBLICUA SUPERIOR CABALLERA
+
+void ProyOblSupCa( float b){
+    Matrix4x4 m;
+    matrixSetIdentity(m);
+    float a = 45 * 0.0174533;
+    b = b * 0.0174533;
+    m[0][2]=cos(b)*tan(a);
+    m[1][2]=sin(b)*tan(a);
+    m[2][2]=0;
+
+    matrixPreMultiply(m,matrizTransformacion);
+}
+
+//22.PROYECCION OBLICUA SUPERIOR DE GABINETE
+
+void ProyOblSupGab( float b){
+    Matrix4x4 m;
+    matrixSetIdentity(m);
+    float a = 63.4 * 0.0174533;
+    b = b * 0.0174533;
+    m[0][2]=cos(b)*tan(a);
+    m[1][2]=sin(b)*tan(a);
+    m[2][2]=0;
+
+    matrixPreMultiply(m,matrizTransformacion);
+}
+
 void TransformarPuntos(void)
 {
     int i,k;
@@ -406,7 +475,13 @@ void display(void)
   //EJEMPLO DE PROYECCION AXONOMETRICA
   //MProyAxo(30,60);
   //EJEMPLO DE PROYECCION AXONOMETRICA
-  MProyIso();
+  //MProyIso();
+  //EJEMPLO DE PROYECCION OBLICUA SUPERIOR
+  //ProyOblS(30,30);
+  //EJEMPLO DE PROYECCION OBLICUA LATERAL
+  //ProyOblL(30,30);
+  //EJEMPLO DE PROYECCION OBLICUA FRONTAL
+  //ProyOblF(30,30);
   TransformarPuntos();
   Dibujar(matrizPuntosF);
   glutSwapBuffers();
